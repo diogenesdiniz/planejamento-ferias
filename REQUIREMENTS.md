@@ -191,6 +191,7 @@ Definido em `.claude/agents/planejador-viagem.md`, com um comando de atalho em `
 - ~~Linha reta ou rota real dentro do mapa embutido.~~ Nenhuma das duas: nenhuma rota é calculada dentro do site, tudo abre no Google Maps externo. Ver 4.2.
 - ~~Tempos de trecho via API ou manual.~~ Manuais, sem API de rotas nenhuma. Ver 4.2.
 - ~~Paris–Madrid de trem ou avião.~~ Avião. Ver `tasks/dias-fratura/plano.md`.
+- ~~Sincronização entre dispositivos.~~ Sim: visitado, reservas marcadas e variante escolhida sincronizam entre os dois dispositivos (Diógenes e parceira) via Firestore, num documento único da viagem, sem tela de login. Ver `adr/0006-estado-compartilhado-via-firestore.md` e `tasks/estado-compartilhado/`.
 
 **Ainda em aberto:**
 
@@ -204,6 +205,5 @@ Definido em `.claude/agents/planejador-viagem.md`, com um comando de atalho em `
 ## 7. Fora de escopo (combinado)
 
 - Geolocalização ao vivo do usuário.
-- Login ou múltiplos perfis de usuário.
-- Sincronização de estado entre dispositivos (celular e iPad não compartilham o que foi marcado como visitado, cada um guarda o seu).
+- Login ou múltiplos perfis de usuário visíveis (a sincronização de estado entre dispositivos, seção 6, usa autenticação anônima nos bastidores, sem tela de login).
 - Dados de clima ou status de linha em tempo real.
