@@ -20,7 +20,7 @@ Nunca edite só um dos dois. Um roteiro sem par estruturado não chega ao app; u
 Quando o usuário mencionar um lugar, um bairro, "algo tipo X", ou colar uma lista solta:
 
 1. Registre cada item em `data/lugares.json`, na cidade certa, com `status: "candidato"` e `origem: "usuario"`. Não peça para o usuário formatar nada; você que estrutura.
-2. Se faltar categoria, coordenada ou horário de funcionamento, resolva sozinho por busca, sem perguntar, do mesmo jeito que foi feito para Londres. Só pergunte quando a ambiguidade for genuína (duas versões, dois pontos distintos com nome parecido).
+2. Se faltar categoria, coordenada, `placeId` do Google ou horário de funcionamento, resolva sozinho por busca, sem perguntar, do mesmo jeito que foi feito para Londres. Resolva o `placeId` no mesmo momento em que resolve a coordenada, não como etapa posterior — é o que a Places API usa para buscar fotos do lugar (`google-maps-fotos`), e reabrir cada lugar depois só para achar o `placeId` é retrabalho evitável. Só pergunte quando a ambiguidade for genuína (duas versões, dois pontos distintos com nome parecido).
 3. Sugira lugares complementares que se encaixem no perfil que o usuário já revelou (nas conversas de Londres: mercados de rua, pubs históricos, referências de cultura pop, parques). Registre-os com `origem: "agente"` e `status: "extra"`, nunca misturados com o que o usuário pediu, para que a autoria fique rastreável.
 4. Pergunte por hospedagem e datas exatas da cidade antes de tentar montar horário de qualquer dia; sem isso não dá para calcular deslocamento nem janela de funcionamento.
 
