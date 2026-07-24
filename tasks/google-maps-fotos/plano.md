@@ -29,6 +29,8 @@
 - [x] Cache simples em memória durante a sessão (não local storage), para não rebuscar a mesma foto se o usuário fechar e reabrir o mesmo card na mesma visita à página. `Map` em escopo de módulo, por `placeId`.
 - [x] Estado de carregamento e de ausência de foto tratados explicitamente (nem toda parada vai ter foto boa, ex.: Claremont Square é só uma praça residencial). Testado: Claremont Square não mostra nada (nem placeholder vazio), exatamente o caso previsto.
 
+**Pegadinha encontrada em produção:** as fotos carregavam em `localhost` mas não em `diogenesdiniz.github.io`. Causa: a chave é restrita por referer com o path completo (`.../roteiro-ferias-2026/*`), mas o navegador manda só a origem (sem path) em requisições cross-origin como `fetch`/`<img>` para `places.googleapis.com` — a Maps JavaScript API aceitou esse referer mais curto, a Places API (New) não. Corrigido com `referrerPolicy: 'unsafe-url'` no `fetch` e no atributo `referrerPolicy` do `<img>`, em `FotosLocal.jsx`, forçando o navegador a mandar a URL completa da página. Nenhuma mudança foi feita na restrição da chave no Google Cloud. Se o domínio de produção mudar algum dia, isto continua funcionando sem ajuste, já que não depende do valor exato do path.
+
 ## 5. Validação de custo
 
 - [ ] Depois de subir para produção, checar o painel de uso do Google Cloud depois de uma semana de testes, para confirmar que o volume real bate com a expectativa de uso pessoal e não algo rodando em loop por engano (ex.: busca de foto disparando a cada re-render). Pendente — depende de uma semana de uso real após o deploy; usuário deve checar o Cloud Console.
