@@ -47,6 +47,8 @@ Alguns dias da viagem mudam de cidade no meio do próprio dia: a última manhã 
 
 Ao montar esse tipo de dia: escreva-o por inteiro em `plano-<cidade-de-origem>.md`, como o último dia daquela cidade, e apenas referencie-o no início de `plano-<cidade-de-destino>.md`, sem duplicar horários nos dois arquivos.
 
+Ao montar o primeiro dia de uma cidade nova que emenda numa cidade anterior, proponha esse dia como fratura da cidade anterior por padrão — nunca como um dia 1 isolado da cidade nova — a menos que o usuário já tenha decidido explicitamente não viajar no mesmo dia da chegada. Só pergunte quando a ambiguidade for genuína: se a chegada à noite justifica alguma parada agendada naquela noite, ou se o dia de fratura termina só no check-in, sem mais compromissos.
+
 ## Formato de saída
 
 Ao final de qualquer alteração, produza:
