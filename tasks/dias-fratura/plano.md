@@ -12,7 +12,7 @@ Tarefas concretas, para consumo direto no Claude Code. Cada uma é pequena o bas
 ## 2. Regra de renderização do mapa
 
 - [x] Mudar a condição que hoje decide `foraDoMapa` (hoje uma flag manual, usada só no Warner Bros) para: `foraDoMapa = flag manual OU parada.cidade !== dia.cidade`. Isto cobre automaticamente qualquer parada da cidade de chegada num dia de fratura, sem precisar marcar cada uma à mão. Implementado em `estaForaDoMapa(dia, parada)`, `src/data/roteiro.js`, usado em `MapaDia.jsx`, `ListaParadas.jsx` e `CardParada.jsx`. Conferido no navegador que o caso real (Warner Bros, sexta) continua idêntico.
-- [ ] Confirmar visualmente que o rótulo de distância (`rotuloFora`) faz sentido para cidade inteira (ex.: "Paris, 340 km a sudeste") e não só para um ponto único como o estúdio da Warner. Depende de existir uma parada real de outra cidade para conferir — sem dado de Paris/Madrid ainda.
+- [x] Confirmar visualmente que o rótulo de distância (`rotuloFora`) faz sentido para cidade inteira (ex.: "Paris, 340 km a sudeste") e não só para um ponto único como o estúdio da Warner. Confirmado com a chegada real em Paris (dia 25/08): "Paris, 344 km a sudeste" na Gare du Nord — e a distância calculada por `distanciaKm` entre St Pancras e a Gare du Nord bateu em 343,4 km, quase idêntica à estimativa do rótulo.
 - [ ] Ajustar o pano de fundo do mapa (rio, parques) para ser função da `cidade` do dia, não fixo em Londres. Preparar os polígonos de apoio de Paris (Sena) e Madrid antes de ligar o dia de fratura Paris–Madrid. Adiado: desenhar polígonos de cidades que ainda não têm nenhum dia no roteiro seria trabalho especulativo sem como verificar; fica para quando Paris/Madrid tiverem data.
 
 ## 3. Navegação
@@ -24,8 +24,8 @@ Tarefas concretas, para consumo direto no Claude Code. Cada uma é pequena o bas
 ## 4. Conteúdo e convenção de arquivo
 
 - [x] Definir a convenção: um dia de fratura é escrito por inteiro em `plano-<cidade-de-origem>.md`, como o último dia daquela cidade. `plano-<cidade-de-destino>.md` apenas referencia esse dia no início ("dia de chegada, ver plano-londres.md"), sem duplicar horários. Já registrada neste plano.md e reforçada nas instruções do agente `planejador-viagem`.
-- [ ] Atualizar `plano-londres.md`: o dia 25/08 passa a incluir, no fim, a parada de chegada em Paris (hospedagem, primeira impressão da noite), como parada com `cidade: "paris"`, uma vez que a hospedagem de Paris for definida.
-- [ ] Mesma convenção aplicada ao dia Paris–Madrid quando as datas forem fechadas.
+- [x] Atualizar `plano-londres.md`: o dia 25/08 passa a incluir, no fim, a parada de chegada em Paris (hospedagem, primeira impressão da noite), como parada com `cidade: "Paris"`. Hospedagem definida: Hotel Libertel Montmartre Opéra, 32 Rue Duperré, 75009 Paris.
+- [ ] Mesma convenção aplicada ao dia Paris–Madrid quando as datas forem fechadas. Datas e hospedagens de Paris e Madrid já estão definidas (ver `plano-paris.md` e `plano-madrid.md`), mas o dia 01/09 (fratura Paris→Madrid) só será escrito por completo quando os lugares de Paris estiverem curados — ele termina num bloco livre em Madrid que ainda não tem roteiro.
 
 ## 5. Agente `planejador-viagem`
 
@@ -34,8 +34,8 @@ Tarefas concretas, para consumo direto no Claude Code. Cada uma é pequena o bas
 
 ## 6. Validação
 
-- [ ] Ao ter a hospedagem de Paris definida, montar o dia 25/08 completo como teste de ponta a ponta desta funcionalidade, antes de generalizar para Paris–Madrid.
-- [ ] Conferir que o índice por categoria (painel existente) continua agrupando corretamente lugares de cidades diferentes sem confundir datas.
+- [x] Ao ter a hospedagem de Paris definida, montar o dia 25/08 completo como teste de ponta a ponta desta funcionalidade, antes de generalizar para Paris–Madrid. Testado no navegador: mapa com a Gare du Nord e o hotel grampeados fora do mapa de Londres, ligados por linha pontilhada; rótulo de fratura "→ Paris" na aba; badges Eurostar e Carro/táxi; sem regressão no dia 3 (Warner Bros).
+- [x] Conferir que o índice por categoria (painel existente) continua agrupando corretamente lugares de cidades diferentes sem confundir datas. Confirmado: "Hotel" e "Estações" mostram entradas de Londres e Paris juntas, cada uma com a data e a cor do dia certas.
 
 ## Fora deste plano
 
